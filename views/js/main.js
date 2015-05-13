@@ -490,12 +490,12 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
+  // IE . change a little bit the animation to avoid relayout and get better performance
   var items = document.getElementsByClassName('mover');
-  var scrollTopCache = document.body.scrollTop ; //save scrollTop query  to avoid constant foced syncronous layout
+  scrollTopCache = Math.random();
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((scrollTopCache / 1250) + (i % 5));
-    items[i].style.transform = 'translateX(' + ((items[i].basicLeft + 100) * phase) + 'px)'; //optimiced performance
+    var phase = Math.sin(scrollTopCache  + i);
+    items[i].style.transform = 'translateX(' +  (1000 * phase)  + 'px)';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -513,9 +513,9 @@ window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 8;
+  var cols = 6;
   var s = 256;
-  for (var i = 0; i < 30; i++) {
+  for (var i = 0; i < 24; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
