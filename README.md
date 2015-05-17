@@ -24,7 +24,6 @@
   https://jsperf.com/getelementbyid-vs-queryselector/11
   https://jsperf.com/getelementsbyclassname-vs-queryselectorall/18
 * A bit of refactoring , remove repited DOM queries , code ...
-* At the end I also changed a little the moving pizzas animation , removed `document.body.scrollTop` to avoid extra relayout for each updatePositions call and reduced pizza elements in the animation. Almost the same animation and more performance.
 
 
 ## Website Performance Optimization portfolio project
