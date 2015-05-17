@@ -494,10 +494,10 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
   // IE . change a little bit the animation to avoid relayout and get better performance
   var items = document.getElementsByClassName('mover');
-  scrollTopCache = Math.random();
+  var scrollTopCache = document.body.scrollTop ; //save scrollTop query to avoid constant foced syncronous layout
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin(scrollTopCache  + i);
-    items[i].style.transform = 'translateX(' +  (1000 * phase)  + 'px)';
+    var phase = Math.sin((scrollTopCache / 1250) + (i % 5));
+    items[i].style.transform = 'translateX(' + ((items[i].basicLeft + 100) * phase) + 'px)'; //optimiced performance
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
