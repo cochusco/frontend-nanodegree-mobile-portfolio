@@ -443,7 +443,7 @@ var resizePizzas = function(size) {
         default:
           console.log("bug in sizeSwitcher");
     }
-    var randomPizzas = document.getElementsByClassName("randomPizzaContainer") ;
+    var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
     // I change directly the original randomPizzas size with an absolute percentage so I can
     // avoid constants synchronous  layouts in the for loop and save extra queries.
     for (var i = 0; i < randomPizzas.length; i++) {
@@ -462,11 +462,8 @@ var resizePizzas = function(size) {
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
-// This for-loop actually creates and appends all of the pizzas when the page loads
-for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
-  pizzasDiv.appendChild(pizzaElementGenerator(i));
-}
+
+
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
@@ -532,3 +529,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   updatePositions();
 });
+
+// Lazy load some pizza images.
+window.addEventListener('load',initialLoad);
+function initialLoad(){
+  // This for-loop actually creates and appends all of the pizzas when the page loads
+  var pizzasDiv = document.getElementById("randomPizzas");
+  for (var i = 2; i < 100; i++) {
+    pizzasDiv.appendChild(pizzaElementGenerator(i));
+  }
+}
