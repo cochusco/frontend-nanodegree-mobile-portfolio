@@ -422,9 +422,12 @@ var resizePizzas = function(size) {
 
   changeSliderLabel(size);
 
-    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
+
    // Iterates through pizza elements on the page and changes their widths
-   // Refactored to no repeat and avoid force synchronous layout.
+   // I refactored changePizzaSizes and deleted determineDx in order to simplify new randomPizzas size calculation. Instead
+   // of calculating new size using the difference with actual and new size and add it to the former
+   // I change directly the original randomPizzas size with an absolute percentage so I can save some queries like
+   // document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth which are causing synchronous layout.
   function changePizzaSizes(size) {
     var newwidth = 0;
      switch(size) {
@@ -441,6 +444,8 @@ var resizePizzas = function(size) {
           console.log("bug in sizeSwitcher");
     }
     var randomPizzas = document.getElementsByClassName("randomPizzaContainer") ;
+    // I change directly the original randomPizzas size with an absolute percentage so I can
+    // avoid constants synchronous  layouts in the for loop and save extra queries.
     for (var i = 0; i < randomPizzas.length; i++) {
       randomPizzas[i].style.width = newwidth + "%";
     }
